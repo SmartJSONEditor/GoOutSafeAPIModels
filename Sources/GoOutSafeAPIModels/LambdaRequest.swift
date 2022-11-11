@@ -94,7 +94,7 @@ public struct LambdaRequest: Codable {
     /// Periodic schedule service
     public let process: Bool?
     
-    public init(locationPushItems: [LocationRequestItem]?, alertPushItems: [PushAlertItem]?, scheduleLocationPush: [ScheduleLocationPushItem]?, tracker: TrackerItem?, process: Bool?) {
+    public init(locationPushItems: [LocationRequestItem]? = nil, alertPushItems: [PushAlertItem]? = nil, scheduleLocationPush: [ScheduleLocationPushItem]? = nil, tracker: TrackerItem? = nil, process: Bool?) {
         self.locationPushItems = locationPushItems
         self.alertPushItems = alertPushItems
         self.scheduleLocationPush = scheduleLocationPush
