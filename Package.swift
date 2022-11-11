@@ -5,6 +5,12 @@ import PackageDescription
 
 let package = Package(
     name: "GoOutSafeAPIModels",
+    platforms: [
+        .iOS(.v16),
+        .watchOS(.v9),
+        .macCatalyst(.v16),
+        .macOS(.v13),
+    ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
