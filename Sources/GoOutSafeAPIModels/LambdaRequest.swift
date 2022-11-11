@@ -16,6 +16,13 @@ public struct LocationRequestItem: Codable {
     public let requestedTimeStamp: Double
     /// User Info
     public let userInfo:[String: String]
+    
+    public init(locationToken: String, requestingKeychainDeviceID: String, requestedTimeStamp: Double, userInfo: [String : String]) {
+        self.locationToken = locationToken
+        self.requestingKeychainDeviceID = requestingKeychainDeviceID
+        self.requestedTimeStamp = requestedTimeStamp
+        self.userInfo = userInfo
+    }
 }
 
 public struct PushAlertItem: Codable {
@@ -25,6 +32,12 @@ public struct PushAlertItem: Codable {
     public let alertTitle: String
     /// Message
     public let alertMessage: String
+    
+    public init(pushToken: String, alertTitle: String, alertMessage: String) {
+        self.pushToken = pushToken
+        self.alertTitle = alertTitle
+        self.alertMessage = alertMessage
+    }
 }
 
 public struct ScheduleLocationPushItem: Codable {
@@ -42,6 +55,16 @@ public struct ScheduleLocationPushItem: Codable {
     public let serviceType: String
     /// Timestamps of trigger times
     public let triggerTimeStamps: [Double]
+    
+    public init(deviceId: String, locationToken: String, requestingKeychainDeviceID: String, trackerId: String, createdTimeStamp: Double, serviceType: String, triggerTimeStamps: [Double]) {
+        self.deviceId = deviceId
+        self.locationToken = locationToken
+        self.requestingKeychainDeviceID = requestingKeychainDeviceID
+        self.trackerId = trackerId
+        self.createdTimeStamp = createdTimeStamp
+        self.serviceType = serviceType
+        self.triggerTimeStamps = triggerTimeStamps
+    }
 }
 
 public struct TrackerItem: Codable {
@@ -51,6 +74,12 @@ public struct TrackerItem: Codable {
     public let trackerId: String
     /// Base64 encoded CLLocationCodable
     public let locationData: String
+    
+    public init(deviceId: String, trackerId: String, locationData: String) {
+        self.deviceId = deviceId
+        self.trackerId = trackerId
+        self.locationData = locationData
+    }
 }
 
 public struct LambdaRequest: Codable {
@@ -64,4 +93,12 @@ public struct LambdaRequest: Codable {
     public let tracker:TrackerItem?
     /// Periodic schedule service
     public let process: Bool?
+    
+    public init(locationPushItems: [LocationRequestItem]?, alertPushItems: [PushAlertItem]?, scheduleLocationPush: [ScheduleLocationPushItem]?, tracker: TrackerItem?, process: Bool?) {
+        self.locationPushItems = locationPushItems
+        self.alertPushItems = alertPushItems
+        self.scheduleLocationPush = scheduleLocationPush
+        self.tracker = tracker
+        self.process = process
+    }
 }
