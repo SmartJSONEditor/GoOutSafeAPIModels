@@ -51,17 +51,20 @@ public struct ScheduleLocationPushItem: Codable {
     public let trackerId: String
     /// Created timestamp
     public let createdTimeStamp: Double
+    /// Created timestamp
+    public let expiresTimeStamp: Double?
     /// Service Type PUB | PRIVATE
     public let serviceType: String
     /// Timestamps of trigger times
     public let triggerTimeStamps: [Double]
     
-    public init(deviceId: String, locationToken: String, requestingKeychainDeviceID: String, trackerId: String, createdTimeStamp: Double, serviceType: String, triggerTimeStamps: [Double]) {
+    public init(deviceId: String, locationToken: String, requestingKeychainDeviceID: String, trackerId: String, createdTimeStamp: Double, expiresTimeStamp: Double? = nil,  serviceType: String, triggerTimeStamps: [Double]) {
         self.deviceId = deviceId
         self.locationToken = locationToken
         self.requestingKeychainDeviceID = requestingKeychainDeviceID
         self.trackerId = trackerId
         self.createdTimeStamp = createdTimeStamp
+        self.expiresTimeStamp = expiresTimeStamp
         self.serviceType = serviceType
         self.triggerTimeStamps = triggerTimeStamps
     }
