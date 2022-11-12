@@ -96,12 +96,15 @@ public struct LambdaRequest: Codable {
     public let tracker:TrackerItem?
     /// Periodic schedule service
     public let process: Bool?
+    /// Get Tracker by id
+    public let trackerId: String?
     
-    public init(locationPushItems: [LocationRequestItem]? = nil, alertPushItems: [PushAlertItem]? = nil, scheduleLocationPush: [ScheduleLocationPushItem]? = nil, tracker: TrackerItem? = nil, process: Bool? = nil) {
+    public init(locationPushItems: [LocationRequestItem]? = nil, alertPushItems: [PushAlertItem]? = nil, scheduleLocationPush: [ScheduleLocationPushItem]? = nil, tracker: TrackerItem? = nil, process: Bool? = nil, trackerId: String? = nil) {
         self.locationPushItems = locationPushItems
         self.alertPushItems = alertPushItems
         self.scheduleLocationPush = scheduleLocationPush
         self.tracker = tracker
         self.process = process
+        self.trackerId = trackerId
     }
 }
