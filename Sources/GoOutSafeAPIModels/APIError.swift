@@ -14,6 +14,7 @@ public enum APIError: Error {
     case undefined
     case publicTrackerIDNotFound
     case publicTrackerCodingError
+    case notAuthorized
 
     public static func fromString(_ string: String) -> APIError {
         switch string {
@@ -22,6 +23,7 @@ public enum APIError: Error {
         case "APIError.requestError": return APIError.requestError
         case "APIError.publicTrackerIDNotFound": return APIError.publicTrackerIDNotFound
         case "APIError.publicTrackerCodingError": return APIError.publicTrackerCodingError
+        case "APIError.notAuthorized": return APIError.notAuthorized
         default:
             return APIError.undefined
         }
@@ -36,6 +38,7 @@ extension APIError: LocalizedError {
         case .requestError: return "APIError.requestError"
         case .publicTrackerIDNotFound: return "APIError.publicTrackerIDNotFound"
         case .publicTrackerCodingError: return "APIError.publicTrackerCodingError"
+        case .notAuthorized: return "APIError.notAuthorized"
         case .undefined: return "APIError.undefined"
         }
     }
