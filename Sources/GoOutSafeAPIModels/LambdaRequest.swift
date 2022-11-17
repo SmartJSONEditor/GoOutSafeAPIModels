@@ -15,9 +15,9 @@ public struct LocationRequestItem: Codable {
     /// Requested timestamp(Time stamp of when the original request was issued)
     public let requestedTimeStamp: Double
     /// User Info
-    public let userInfo:[String: String]
-    
-    public init(locationToken: String, requestingKeychainDeviceID: String, requestedTimeStamp: Double, userInfo: [String : String]) {
+    public let userInfo: [String: String]
+
+    public init(locationToken: String, requestingKeychainDeviceID: String, requestedTimeStamp: Double, userInfo: [String: String]) {
         self.locationToken = locationToken
         self.requestingKeychainDeviceID = requestingKeychainDeviceID
         self.requestedTimeStamp = requestedTimeStamp
@@ -32,7 +32,7 @@ public struct PushAlertItem: Codable {
     public let alertTitle: String
     /// Message
     public let alertMessage: String
-    
+
     public init(pushToken: String, alertTitle: String, alertMessage: String) {
         self.pushToken = pushToken
         self.alertTitle = alertTitle
@@ -57,8 +57,8 @@ public struct ScheduleLocationPushItem: Codable {
     public let serviceType: String
     /// Timestamps of trigger times
     public let triggerTimeStamps: [Double]
-    
-    public init(deviceId: String, locationToken: String, requestingKeychainDeviceID: String, trackerId: String, createdTimeStamp: Double, expiresTimeStamp: Double? = nil,  serviceType: String, triggerTimeStamps: [Double]) {
+
+    public init(deviceId: String, locationToken: String, requestingKeychainDeviceID: String, trackerId: String, createdTimeStamp: Double, expiresTimeStamp: Double? = nil, serviceType: String, triggerTimeStamps: [Double]) {
         self.deviceId = deviceId
         self.locationToken = locationToken
         self.requestingKeychainDeviceID = requestingKeychainDeviceID
@@ -77,11 +77,35 @@ public struct TrackerItem: Codable {
     public let trackerId: String
     /// Base64 encoded CLLocationCodable
     public let locationData: String
-    
+
     public init(deviceId: String, trackerId: String, locationData: String) {
         self.deviceId = deviceId
         self.trackerId = trackerId
         self.locationData = locationData
+    }
+}
+
+public struct Auth: Codable {
+    /// Opaque userId
+    public let userId: String
+    /// JWT
+    public let token: String
+    /// Auth code
+    public let authCode: String
+    /// Email
+    public let email: String?
+    /// Given Name
+    public let givenName: String?
+    /// Family Name
+    public let familyName: String?
+
+    public init(userId: String, token: String, authCode: String, email: String?, givenName: String?, familyName: String?) {
+        self.userId = userId
+        self.token = token
+        self.authCode = authCode
+        self.email = email
+        self.givenName = givenName
+        self.familyName = familyName
     }
 }
 
@@ -91,20 +115,30 @@ public struct LambdaRequest: Codable {
     /// Push APNS notification
     public let alertPushItems: [PushAlertItem]?
     /// Schedule Location Items
-    public let scheduleLocationPush:[ScheduleLocationPushItem]?
+    public let scheduleLocationPush: [ScheduleLocationPushItem]?
     /// Update tracker from Location Extension
-    public let tracker:TrackerItem?
+    public let tracker: TrackerItem?
     /// Periodic schedule service
     public let process: Bool?
     /// Get Tracker by id
     public let trackerId: String?
-    
-    public init(locationPushItems: [LocationRequestItem]? = nil, alertPushItems: [PushAlertItem]? = nil, scheduleLocationPush: [ScheduleLocationPushItem]? = nil, tracker: TrackerItem? = nil, process: Bool? = nil, trackerId: String? = nil) {
+    /// Auth
+    public let auth: Auth?
+
+    public init(
+        locationPushItems: [LocationRequestItem]? = nil,
+        alertPushItems: [PushAlertItem]? = nil,
+        scheduleLocationPush: [ScheduleLocationPushItem]? = nil,
+        tracker: TrackerItem? = nil,
+        process: Bool? = nil,
+        trackerId: String? = nil,
+        auth: Auth? = nil) {
         self.locationPushItems = locationPushItems
         self.alertPushItems = alertPushItems
         self.scheduleLocationPush = scheduleLocationPush
         self.tracker = tracker
         self.process = process
         self.trackerId = trackerId
+        self.auth = auth
     }
 }
