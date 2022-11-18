@@ -142,3 +142,34 @@ public struct LambdaRequest: Codable {
         self.auth = auth
     }
 }
+
+public struct Params: Codable {
+    public var path: [String: String]?
+    public var querystring: [String: String]?
+    public var header: [String: String]?
+
+    public init(path: [String: String]? = nil, querystring: [String: String]? = nil, header: [String: String]? = nil) {
+        self.path = path
+        self.querystring = querystring
+        self.header = header
+    }
+}
+
+public struct APIGatewayPassthrough: Codable {
+    enum CodingKeys: String, CodingKey {
+        case bodyJSON = "body-json"
+        case stageVariables = "stage-variables"
+    }
+
+    public var bodyJSON: LambdaRequest?
+    public var params: Params?
+    public var stageVariables: [String: String]?
+    public var context: [String: String]?
+    
+    public init(bodyJSON: LambdaRequest? = nil, params: Params? = nil, stageVariables: [String : String]? = nil, context: [String : String]? = nil) {
+        self.bodyJSON = bodyJSON
+        self.params = params
+        self.stageVariables = stageVariables
+        self.context = context
+    }
+}
