@@ -155,18 +155,18 @@ public struct Params: Codable {
     }
 }
 
-public struct APIGatewayPassthrough: Codable {
+public struct APIGatewayPassthrough<T: Codable>: Codable {
     enum CodingKeys: String, CodingKey {
         case bodyJSON = "body-json"
         case stageVariables = "stage-variables"
     }
 
-    public var bodyJSON: LambdaRequest?
+    public var bodyJSON: T?
     public var params: Params?
     public var stageVariables: [String: String]?
     public var context: [String: String]?
     
-    public init(bodyJSON: LambdaRequest? = nil, params: Params? = nil, stageVariables: [String : String]? = nil, context: [String : String]? = nil) {
+    public init(bodyJSON: T? = nil, params: Params? = nil, stageVariables: [String : String]? = nil, context: [String : String]? = nil) {
         self.bodyJSON = bodyJSON
         self.params = params
         self.stageVariables = stageVariables
