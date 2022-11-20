@@ -159,6 +159,8 @@ public struct APIGatewayPassthrough<T: Codable>: Codable {
     enum CodingKeys: String, CodingKey {
         case bodyJSON = "body-json"
         case stageVariables = "stage-variables"
+        case params = "params"
+        case context = "context"
     }
 
     public var bodyJSON: T?
